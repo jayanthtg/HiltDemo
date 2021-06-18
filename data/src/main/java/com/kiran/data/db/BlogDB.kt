@@ -9,6 +9,6 @@ abstract class BlogDB: RoomDatabase() {
     abstract fun BlogDAO(): BlogDAO
 
     companion object{
-        val DATABASE_NAME: String = "blog_db"
+        const val DATABASE_NAME: String = "blog_db"
     }
 }

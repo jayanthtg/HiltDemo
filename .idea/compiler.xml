@@ -4,6 +4,7 @@
     <bytecodeTargetLevel target="1.7">
       <module name="HiltPOC.app" target="11" />
       <module name="HiltPOC.data" target="11" />
+      <module name="HiltPOC.network" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

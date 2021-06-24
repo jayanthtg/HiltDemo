@@ -7,6 +7,9 @@ import com.kiran.data.network.BlogNetworkMapper
 import com.kiran.data.repository.*
 import com.kiran.domain.repository.BlogRepository
 import com.kiran.domain.usecases.BlogUseCase
+import com.kiran.network.INetworkKit
+import com.kiran.network.buildAPI
+import com.kiran.network.di.CoroutineJsonNetworkProvider
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,6 +19,12 @@ import dagger.hilt.android.scopes.ViewModelScoped
 @Module
 @InstallIn(ViewModelComponent::class)
 object UseCaseModule {
+
+    @ViewModelScoped
+    @Provides
+    fun providesBlogAPI(
+        @CoroutineJsonNetworkProvider networkKit: INetworkKit
+    ): BlogAPI = buildAPI(networkKit, "https://open-api.xyz/placeholder1/")
 
     @ViewModelScoped
     @Provides

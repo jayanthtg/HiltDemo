@@ -3,6 +3,8 @@ package com.kiran.hiltpoc.di
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.kiran.data.network.BlogAPI
+import com.kiran.network.NetworkKit
+import com.kiran.network.buildAPI
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,7 +20,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
-    @Singleton
+    /*@Singleton
     @Provides
     fun provideGsonBuilder(): Gson {
         return GsonBuilder()
@@ -39,16 +41,16 @@ object NetworkModule {
             }
         )
         return@run build()
-    }
+    }*/
 
-    @Provides
+/*    @Provides
     @Singleton
     fun providesBlogAPI(
         httpClient: OkHttpClient,
         gson:  Gson
     ): BlogAPI = providesRetrofit(httpClient,
         "https://open-api.xyz/placeholder/", gson)
-            .create(BlogAPI::class.java)
+            .create(BlogAPI::class.java)*/
 
     private fun providesRetrofit(
         httpClient: OkHttpClient,
@@ -61,7 +63,6 @@ object NetworkModule {
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
     }
-
 
     /*@Singleton
     @Provides

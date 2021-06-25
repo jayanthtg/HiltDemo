@@ -9,7 +9,6 @@ import com.kiran.domain.repository.BlogRepository
 import com.kiran.domain.usecases.BlogUseCase
 import com.kiran.network.INetworkKit
 import com.kiran.network.buildAPI
-import com.kiran.network.di.CoroutineJsonNetworkProvider
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,8 +22,8 @@ object UseCaseModule {
     @ViewModelScoped
     @Provides
     fun providesBlogAPI(
-        @CoroutineJsonNetworkProvider networkKit: INetworkKit
-    ): BlogAPI = buildAPI(networkKit, "https://open-api.xyz/placeholder1/")
+        networkKit: INetworkKit
+    ): BlogAPI = buildAPI(networkKit, "https://open-api.xyz/placeholder/")
 
     @ViewModelScoped
     @Provides

@@ -9,7 +9,6 @@ import java.lang.reflect.Type
 
 class RetryWithErrorHandleCallAdapterFactory : CallAdapter.Factory() {
     private var retryValue: Int = 0
-
     override fun get(
         returnType: Type,
         annotations: Array<out Annotation>,
@@ -23,12 +22,11 @@ class RetryWithErrorHandleCallAdapterFactory : CallAdapter.Factory() {
         getRetry(annotations)?.let {
             retryValue = it.value
         }
-        val adapter = retrofit.nextCallAdapter(this, returnType, annotations)
         return RetryWithErrorHandleCallAdapter(
-            adapter, retryValue
+            callAdapter = retrofit.nextCallAdapter(this, returnType, annotations),
+            maxRetries = retryValue
         )
     }
-
     private fun getRetry(annotations: Array<out Annotation>) =
         annotations.filterIsInstance<Retry>()
             .firstOrNull()

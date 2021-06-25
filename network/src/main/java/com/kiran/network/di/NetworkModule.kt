@@ -4,10 +4,10 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.kiran.network.INetworkKit
 import com.kiran.network.NetworkKit
+import com.kiran.network.calladapter.coroutine.RetryWithErrorHandleCallAdapterFactory
 import com.kiran.network.client.ApiClient
 import com.kiran.network.client.IApiClient
 import com.kiran.network.client.interceptor.HeaderInterceptor
-import com.kiran.network.calladapter.coroutine.RetryWithErrorHandleCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -51,28 +51,17 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    @CoroutineJsonNetworkProvider
-    fun providesJSONNetworkKit(
-        client: IApiClient,
-        @CoroutineJsonNetworkProvider factory: Converter.Factory,
-        callAdapterFactory: CallAdapter.Factory
-    ): INetworkKit {
-        return NetworkKit(client, factory, callAdapterFactory)
-    }
-
-    @Singleton
-    @Provides
     @CoroutineXMLNetworkProvider
     fun providesXMLConvertorFactory(): Converter.Factory = JaxbConverterFactory.create()
 
     @Singleton
     @Provides
-    @CoroutineXMLNetworkProvider
-    fun providesXMLNetworkKit(
+    fun providesJSONNetworkKit(
         client: IApiClient,
-        @CoroutineXMLNetworkProvider factory: Converter.Factory,
+        @CoroutineJsonNetworkProvider gsonFactory: Converter.Factory,
+        @CoroutineXMLNetworkProvider xmlFactory: Converter.Factory,
         callAdapterFactory: CallAdapter.Factory
     ): INetworkKit {
-        return NetworkKit(client, factory, callAdapterFactory)
+        return NetworkKit(client, gsonFactory,xmlFactory, callAdapterFactory)
     }
 }

@@ -61,7 +61,7 @@ class ApiClient private constructor(
             this.interceptors = mutableListOf(*interceptors)
         }
 
-        fun authenticator(authenticator: Authenticator?) = apply {
+        fun authenticator(authenticator: Authenticator) = apply {
             this.authenticator = authenticator
         }
 
